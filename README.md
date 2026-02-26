@@ -1,70 +1,101 @@
-# Getting Started with Create React App
+Hotel Room Reservation System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+A dynamic hotel room reservation system built with React. This application simulates a hotel with 97 rooms across 10 floors and implements intelligent booking logic to minimize travel time between booked rooms. It follows specific rules for room allocation, visualization, and user interactions as per the assignment requirements.
+🎯 Project Overview
 
-In the project directory, you can run:
+* Problem Statement: Manage bookings for a hotel with floors 1-9 (10 rooms each: e.g., 101-110) and floor 10 (7 rooms: 1001-1007). Guests can book up to 5 rooms, prioritizing same-floor availability and minimizing total travel time (horizontal: 1 min/room, vertical: 2 min/floor).
+* Key Features:
 
-### `npm start`
+Input for number of rooms (1-5) and automated booking.
+Visualization of all rooms with color-coding (green: available, red: booked).
+Calculate and display total travel time for the booking.
+Buttons: Book (assign optimal rooms), Reset (clear all bookings), Random (generate random occupancy for testing).
+Optimal booking logic: Same floor first; if not possible, cross-floor with minimal combined travel time.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+This project was developed as an assignment to demonstrate React state management, algorithmic logic, and UI/UX for a real-world simulation.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* Controls panel: Input field, Book/Reset/Random buttons, and travel time display.
+* Hotel layout: Vertical stack of floors, each showing room numbers and status.
 
-### `npm run build`
+🚀 Technologies Used
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Frontend: React.js (Functional Components, Hooks: useState)
+* Styling: CSS (Custom styles for layout and visualization)
+* Logic: JavaScript algorithms for room optimization and travel time calculation
+* Deployment: Vercel or Netlify (for live hosting)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+🛠️ Installation & Setup (Local Development)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. 
+Clone the Repository:
+git clone https://github.com/shwet111/hotel-reservation.git
+cd hotel-reservation
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. 
+Install Dependencies:
+npm install
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. 
+Run the Application:
+npm start
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+The app will open at http://localhost:3000.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+4. 
+Build for Production (Optional):
+npm run build
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This creates an optimized build/ folder for deployment.
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+📖 Usage Guide
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. Enter Number of Rooms: Type a value between 1 and 5 in the input field.
+2. Book Rooms: Click Book to automatically select optimal rooms based on availability and travel time rules. The total travel time will be displayed.
+3. Visualize: Rooms are shown by floor. Available rooms are green; booked rooms turn red.
+4. Test Scenarios:
 
-### Advanced Configuration
+Click Random to simulate partial occupancy (40% rooms booked randomly).
+Click Reset to clear all bookings and start fresh.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+5. Edge Cases: If not enough rooms are available, an alert will notify you.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Example Booking
 
-### `npm run build` fails to minify
+* Request 4 rooms on a fresh hotel: Books rooms 101-104 (same floor, 3 min horizontal travel).
+* After random occupancy: May book across floors, e.g., 101-102 (Floor 1) + 201-202 (Floor 2), with 4 min total travel (2 min vertical + 2 min horizontal).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+🔧 Booking Logic Details
+
+* Single Floor Priority: Checks each floor for sufficient available rooms, selecting the leftmost (closest to stairs/lift) contiguous set.
+* Cross-Floor Fallback: If no single floor works, selects the set of available rooms (sorted by floor/position) that minimizes travel time between the first and last room in the set.
+* Travel Time Formula: Vertical = |floorA - floorB| × 2 mins + Horizontal = |positionA - positionB| × 1 min (positions start from 0 near the lift).
+
+🌐 Live Demo
+
+* Deployed on Vercel (https://hotel-reservation-dun.vercel.app/)
+* Or check the GitHub repo for the latest code.
+
+📝 Assignment Compliance
+This implementation fully addresses the deliverables:
+
+* Interface for entering room count and booking.
+* Room visualization.
+* Random occupancy generator.
+* Reset functionality.
+* Dynamic travel time calculation.
+
+🤝 Contributing
+Feel free to fork this repo, create issues, or submit pull requests for improvements (e.g., adding persistence with localStorage or more advanced UI).
+📄 License
+This project is licensed under the MIT License - see the LICENSE file for details.
